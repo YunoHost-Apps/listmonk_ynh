@@ -1,0 +1,16 @@
+[app]
+address = "127.0.0.1:__PORT__"
+admin_username = "__ADMIN__"
+admin_password = "__PASSWORD__"
+
+# Database.
+[db]
+host = "localhost"
+port = 5432
+user = "__DB_USER__"
+password = "__DB_PWD__"
+database = "__DB_NAME__"
+ssl_mode = "disable"
+max_open = 25
+max_idle = 25
+max_lifetime = "300s"

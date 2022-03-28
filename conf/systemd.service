@@ -1,0 +1,14 @@
+[Unit]
+Description=Listmonk
+Documentation=https://listmonk.app/docs/
+
+[Service]
+Type=simple
+User=__APP__
+Group=__APP__
+WorkingDirectory=__FINALPATH__/
+ExecStart=__FINALPATH__/listmonk
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
