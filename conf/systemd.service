@@ -1,5 +1,5 @@
 [Unit]
-Description=Listmonk
+Description=Listmonk: newsletter and mailing list manager
 Documentation=https://listmonk.app/docs/
 
 [Service]

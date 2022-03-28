@@ -111,7 +111,7 @@ yunohost service add $app --description="Newsletter and mailing list manager" --
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=3
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
 
 #=================================================
 # GENERIC FINALIZATION
