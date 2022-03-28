@@ -1,5 +1,14 @@
 [app]
+# Interface and port where the app will run its webserver.  The default value
+# of localhost will only listen to connections from the current machine. To
+# listen on all interfaces use '0.0.0.0'. To listen on the default web address
+# port, use port 80 (this will require running with elevated permissions).
 address = "127.0.0.1:__PORT__"
+
+# BasicAuth authentication for the admin dashboard. This will eventually
+# be replaced with a better multi-user, role-based authentication system.
+# IMPORTANT: Leave both values empty to disable authentication on admin
+# only where an external authentication is already setup.
 admin_username = "__ADMIN__"
 admin_password = "__PASSWORD__"
 
