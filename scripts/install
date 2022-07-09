@@ -172,7 +172,7 @@ then
 fi
 
 # Only the admin can access the admin panel of the app (if the app has an admin panel)
-ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
+ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin --auth_header=false
 
 # Everyone can access the API part
 # We don't want to display the tile in the SSO so we put --show_tile="false"
