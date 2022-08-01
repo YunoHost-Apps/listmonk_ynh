@@ -7,6 +7,7 @@
 #=================================================
 
 source _common.sh
+source ynh_install_go
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -94,7 +95,30 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path"  --source_id=$YNH_ARCH --keep="$final_path/config.toml"
+	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
+	then
+		ynh_setup_source --dest_dir="$final_path/build" --keep="$final_path/config.toml"
+		# Install Nodejs
+		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
+		# Install Yarn
+		ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ stable main" --package="yarn" --key="https://dl.yarnpkg.com/debian/pubkey.gpg"
+		# Install Go
+		ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
+		pushd "$final_path/build"
+			# Build the sources
+			ynh_use_go
+			export GOPATH="$final_path/build/go"
+			export GOCACHE="$final_path/build/.cache"
+			ynh_use_nodejs
+			make dist
+			mv listmonk ..
+		popd
+		ynh_remove_go
+		ynh_remove_nodejs
+		ynh_secure_remove --file="$final_path/build"
+	else
+		ynh_setup_source --dest_dir="$final_path"  --source_id=$YNH_ARCH --keep="$final_path/config.toml"
+	fi
 fi
 
 chmod 750 "$final_path"
