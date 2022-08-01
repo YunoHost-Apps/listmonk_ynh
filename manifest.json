@@ -17,8 +17,8 @@
     },
     "license": "AGPL-3.0-only",
     "maintainer": {
-        "name": "",
-        "email": ""
+        "name": "Navan Chauhan",
+        "email": "listmonk@navan.email"
     },
     "requirements": {
         "yunohost": ">= 4.3.0"
