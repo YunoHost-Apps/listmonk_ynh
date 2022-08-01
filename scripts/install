@@ -39,7 +39,7 @@ app=$YNH_APP_INSTANCE_NAME
 ynh_script_progression --message="Validating installation parameters..." --weight=1
 
 # Check machine architecture (in particular, we don't support 32bit machines)
-if [ $architecture == "i386" ] || [ $YNH_ARCH == "armel" ]
+if [ $YNH_ARCH == "i386" ] || [ $YNH_ARCH == "armel" ]
 then
 	ynh_die --message="Sorry, because of NodeJS framework, this app can't be installed on i386 (32 bits) or armel machine."
 fi
