@@ -132,7 +132,7 @@ then
 		export GOPATH="$final_path/build/go"
 		export GOCACHE="$final_path/build/.cache"
 		ynh_use_nodejs
-		ynh_exec_warn_less sudo -u $app make dist
+		make dist
 	popd
 	ynh_remove_go
 else
