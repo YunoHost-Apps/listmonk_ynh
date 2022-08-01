@@ -133,11 +133,13 @@ then
 		export GOCACHE="$final_path/build/.cache"
 		ynh_use_nodejs
 		make dist
+		mv listmonk ..
 	popd
 	ynh_remove_go
+	ynh_remove_nodejs
+	ynh_secure_remove --file="$final_path/build"
 else
 	ynh_setup_source --dest_dir="$final_path" --source_id=$YNH_ARCH
-	chmod +x "$final_path/listmonk"
 fi
 
 chmod 750 "$final_path"
