@@ -1,0 +1,7 @@
+SOURCE_URL=https://github.com/knadh/listmonk/archive/refs/tags/v2.2.0.tar.gz
+SOURCE_SUM=e3f1cc89972cafaab78cda38be54ab3fc115fd7846e2e7dae1b19fff002e1c77
+SOURCE_SUM_PRG=sha256sum
+SOURCE_FORMAT=tar.gz
+SOURCE_IN_SUBDIR=true
+SOURCE_FILENAME=
+SOURCE_EXTRACT=true
