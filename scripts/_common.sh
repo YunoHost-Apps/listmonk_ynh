@@ -7,6 +7,9 @@
 # dependencies used by the app
 pkg_dependencies="postgresql"
 
+nodejs_version=16
+GO_VERSION="1.18"
+
 #=================================================
 # PERSONAL HELPERS
 #=================================================
