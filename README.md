@@ -20,7 +20,6 @@ Listmonk is a standalone, self-hosted, newsletter and mailing list manager. It i
 
 **Shipped version:** 2.2.0~ynh2
 
-
 **Demo:** https://demo.listmonk.app/
 
 ## Screenshots
