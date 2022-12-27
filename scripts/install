@@ -28,8 +28,8 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
-admin=""
-password=""
+admin=$YNH_APP_ARG_ADMIN
+password=$YNH_APP_ARG_PASSWORD
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -209,12 +209,12 @@ then
 fi
 
 # Only the admin can access the admin panel of the app (if the app has an admin panel)
-ynh_permission_create --permission="admin" --url="/admin" --additional_urls="/admin /api" --allowed=$admin --auth_header=false
+ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin --auth_header=false
 
 # Everyone can access the API part
 # We don't want to display the tile in the SSO so we put --show_tile="false"
 # And we don't want the YunoHost admin to be able to remove visitors group to this permission, so we put --protected="true"
-ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
+ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
 
 #=================================================
 # RELOAD NGINX
