@@ -79,6 +79,8 @@ if ! ynh_permission_exists --permission="api"; then
 fi
 
 if ynh_compare_current_package_version --comparison le --version 2.3.0~ynh1
+	mkdir -p "$final_path/uploads"
+
 	ynh_permission_delete --permission="admin"
 	ynh_permission_delete --permission="api"
 
@@ -102,11 +104,10 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
-
 	# Download, check integrity, uncompress and patch the source from app.src
 	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
 	then
-		ynh_setup_source --dest_dir="$final_path/build" --keep="$final_path/config.toml"
+		ynh_setup_source --dest_dir="$final_path/build" --keep="$final_path/config.toml uploads"
 		# Install Nodejs
 		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
 		# Install Yarn
@@ -126,7 +127,7 @@ then
 		ynh_remove_nodejs
 		ynh_secure_remove --file="$final_path/build"
 	else
-		ynh_setup_source --dest_dir="$final_path"  --source_id=$YNH_ARCH --keep="$final_path/config.toml"
+		ynh_setup_source --dest_dir="$final_path"  --source_id=$YNH_ARCH --keep="$final_path/config.toml uploads"
 	fi
 fi
 
