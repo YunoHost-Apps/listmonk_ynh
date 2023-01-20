@@ -78,6 +78,28 @@ if ! ynh_permission_exists --permission="api"; then
 	ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
 fi
 
+if ynh_compare_current_package_version --comparison le --version 2.3.0~ynh3
+then
+	mkdir -p "$final_path/uploads"
+
+	ynh_permission_delete --permission="admin"
+	ynh_permission_delete --permission="api"
+
+	ynh_permission_create --permission="admin" --url="/admin" --additional_urls="/admin /api" --allowed=$admin --auth_header=false
+	ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
+fi
+
+if ynh_compare_current_package_version --comparison le --version 2.3.0~ynh1
+then
+	mkdir -p "$final_path/uploads"
+
+	ynh_permission_delete --permission="admin"
+	ynh_permission_delete --permission="api"
+
+	ynh_permission_create --permission="admin" --url="/admin" --additional_urls="/admin /api" --allowed=$admin --auth_header=false
+	ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
+fi
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
