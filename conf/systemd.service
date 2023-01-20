@@ -1,12 +1,16 @@
 [Unit]
 Description=Listmonk: newsletter and mailing list manager
 Documentation=https://listmonk.app/docs/
+ConditionPathExists=__FINALPATH__/config.toml
+After=network.target
 
 [Service]
 Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__FINALPATH__/
+ExecStartPre=/usr/bin/mkdir -p "__FINALPATH__/uploads"
+ExecStartPre=__FINALPATH__/listmonk --config __FINALPATH__/config.toml --upgrade --yes
 ExecStart=__FINALPATH__/listmonk
 Restart=always
 

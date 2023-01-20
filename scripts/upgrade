@@ -70,12 +70,23 @@ fi
 
 if ! ynh_permission_exists --permission="admin"; then
 	# Create the required permissions
-	ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin --auth_header=false
+	ynh_permission_create --permission="admin" --url="/admin" --additional_urls="/admin /api" --allowed=$admin --auth_header=false
 fi
 
 # Create a permission if needed
 if ! ynh_permission_exists --permission="api"; then
-	ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
+	ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
+fi
+
+if ynh_compare_current_package_version --comparison le --version 2.3.0~ynh3
+then
+	mkdir -p "$final_path/uploads"
+
+	ynh_permission_delete --permission="admin"
+	ynh_permission_delete --permission="api"
+
+	ynh_permission_create --permission="admin" --url="/admin" --additional_urls="/admin /api" --allowed=$admin --auth_header=false
+	ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
 fi
 
 #=================================================
@@ -97,7 +108,7 @@ then
 	# Download, check integrity, uncompress and patch the source from app.src
 	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
 	then
-		ynh_setup_source --dest_dir="$final_path/build" --keep="$final_path/config.toml"
+		ynh_setup_source --dest_dir="$final_path/build" --keep="$final_path/config.toml uploads"
 		# Install Nodejs
 		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
 		# Install Yarn
@@ -117,7 +128,7 @@ then
 		ynh_remove_nodejs
 		ynh_secure_remove --file="$final_path/build"
 	else
-		ynh_setup_source --dest_dir="$final_path"  --source_id=$YNH_ARCH --keep="$final_path/config.toml"
+		ynh_setup_source --dest_dir="$final_path"  --source_id=$YNH_ARCH --keep="$final_path/config.toml uploads"
 	fi
 fi
 
@@ -144,12 +155,12 @@ ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
-# ynh_script_progression --message="Updating a configuration file..." --time --weight=1
+ynh_script_progression --message="Updating a configuration file..." --time --weight=1
 
-# ynh_add_config --template="../conf/config.toml" --destination="$final_path/config.toml"
+ynh_add_config --template="../conf/config.toml" --destination="$final_path/config.toml"
 
-# chmod 400 "$final_path/config.toml"
-# chown $app:$app "$final_path/config.toml"
+chmod 400 "$final_path/config.toml"
+chown $app:$app "$final_path/config.toml"
 
 #=================================================
 # DATABASE CONFIGURATION
