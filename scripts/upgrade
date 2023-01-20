@@ -89,6 +89,18 @@ then
 	ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
 fi
 
+if ynh_compare_current_package_version --comparison le --version 2.3.0~ynh1
+then
+	mkdir -p "$final_path/uploads"
+
+	ynh_permission_delete --permission="admin"
+	ynh_permission_delete --permission="api"
+
+	ynh_permission_create --permission="admin" --url="/admin" --additional_urls="/admin /api" --allowed=$admin --auth_header=false
+	ynh_permission_create --permission="api" --url="/public" --additional_urls="/api/public" --allowed="visitors" --show_tile="false" --protected="true"
+fi
+
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
@@ -104,7 +116,6 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
-
 	# Download, check integrity, uncompress and patch the source from app.src
 	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
 	then
