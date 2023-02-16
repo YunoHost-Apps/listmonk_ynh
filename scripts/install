@@ -44,12 +44,6 @@ then
 	ynh_die --message="Sorry, because of NodeJS framework, this app can't be installed on i386 (32 bits) or armel machine."
 fi
 
-# Check machine architecture (in particular, we don't support ARM and 32bit machines)
-#if [ $YNH_ARCH == "i386" ] || [ $YNH_ARCH == "armel" ] || [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
-#then
-#	ynh_die --message="Sorry, but this app can only be installed on a x86, 64 bits machine :("
-#fi
-
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
