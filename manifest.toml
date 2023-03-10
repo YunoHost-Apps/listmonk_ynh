@@ -46,8 +46,8 @@ ram.runtime = "50M"
     [resources.sources]
 
         [resources.sources.main]
-        url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.2.0.tar.gz"
-        sha256 = "6eef831f7ceef80624ae69cd7020504344410d0f8015a0e150b88d324894ca8d"
+        url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.3.0.tar.gz"
+        sha256 = "54cab80ca16dbf58ce40b7fc1ae88a9f8ed4c9d9a54387a77b1a90cb4dba3404"
 
     [resources.system_user]
 
@@ -71,9 +71,10 @@ ram.runtime = "50M"
     [resources.apt]
     packages = "postgresql"
 
-    extras.repo = "deb https://dl.yarnpkg.com/debian/ stable main"
-    extras.key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
-    extras.packages = "yarn"
+        [resources.apt.extras.yarn]
+        repo = "deb https://dl.yarnpkg.com/debian/ stable main"
+        key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
+        packages = "yarn"
 
     [resources.database]
     type = "postgresql"
