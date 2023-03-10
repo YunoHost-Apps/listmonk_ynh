@@ -7,6 +7,7 @@
 #=================================================
 
 source _common.sh
+source ynh_install_go
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -33,12 +34,33 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
+	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
+	then
+		ynh_setup_source --dest_dir="$final_path/build" --source_id=arm --keep="$final_path/config.toml"
+		# Install Nodejs
+		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
+		# Install Go
+		ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
+		pushd "$final_path/build"
+			# Build the sources
+			ynh_use_go
+			export GOPATH="$final_path/build/go"
+			export GOCACHE="$final_path/build/.cache"
+			ynh_use_nodejs
+			make dist
+			mv listmonk ..
+		popd
+		ynh_remove_go
+		ynh_remove_nodejs
+		ynh_secure_remove --file="$final_path/build"
+	else
+		ynh_setup_source --dest_dir="$final_path" --keep="$final_path/config.toml"
+	fi
 fi
 
-chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
-chmod +x "$install_dir/listmonk"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+chmod +x "$final_path/listmonk"
 
 #=================================================
 # NGINX CONFIGURATION

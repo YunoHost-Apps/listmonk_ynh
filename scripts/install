@@ -7,6 +7,7 @@
 #=================================================
 
 source _common.sh
+source ynh_install_go
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -22,15 +23,49 @@ password=$YNH_APP_ARG_PASSWORD
 ynh_app_setting_set --app=$app --key=password --value="$password"
 
 #=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing dependencies..." --weight=12
+
+if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
+then
+	# Install Nodejs
+	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
+
+	# Install Go
+	ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
+fi
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=3
 
-ynh_setup_source --dest_dir="$install_dir"
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
-chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
-chmod +x "$install_dir/listmonk"
+# Download, check integrity, uncompress and patch the source from app.src
+if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
+then
+	ynh_setup_source --dest_dir="$final_path/build" --source_id=arm
+	pushd "$final_path/build"
+		# Build the sources
+		ynh_use_go
+		export GOPATH="$final_path/build/go"
+		export GOCACHE="$final_path/build/.cache"
+		ynh_use_nodejs
+		make dist
+		mv listmonk ..
+	popd
+	ynh_remove_go
+	ynh_remove_nodejs
+	ynh_secure_remove --file="$final_path/build"
+else
+	ynh_setup_source --dest_dir="$final_path"
+fi
+
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+chmod +x "$final_path/listmonk"
 
 #=================================================
 # NGINX CONFIGURATION
