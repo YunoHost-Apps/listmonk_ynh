@@ -36,31 +36,31 @@ then
 	# Download, check integrity, uncompress and patch the source from app.src
 	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
 	then
-		ynh_setup_source --dest_dir="$final_path/build" --source_id=arm --keep="$final_path/config.toml"
+		ynh_setup_source --dest_dir="$install_dir/build" --source_id=arm --keep="$install_dir/config.toml"
 		# Install Nodejs
 		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
 		# Install Go
 		ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
-		pushd "$final_path/build"
+		pushd "$install_dir/build"
 			# Build the sources
 			ynh_use_go
-			export GOPATH="$final_path/build/go"
-			export GOCACHE="$final_path/build/.cache"
+			export GOPATH="$install_dir/build/go"
+			export GOCACHE="$install_dir/build/.cache"
 			ynh_use_nodejs
 			make dist
 			mv listmonk ..
 		popd
 		ynh_remove_go
 		ynh_remove_nodejs
-		ynh_secure_remove --file="$final_path/build"
+		ynh_secure_remove --file="$install_dir/build"
 	else
-		ynh_setup_source --dest_dir="$final_path" --keep="$final_path/config.toml"
+		ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
 	fi
 fi
 
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
-chmod +x "$final_path/listmonk"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
+chmod +x "$install_dir/listmonk"
 
 #=================================================
 # NGINX CONFIGURATION
