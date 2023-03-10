@@ -6,8 +6,8 @@ Documentation=https://listmonk.app/docs/
 Type=simple
 User=__APP__
 Group=__APP__
-WorkingDirectory=__FINALPATH__/
-ExecStart=__FINALPATH__/listmonk
+WorkingDirectory=__INSTALL_DIR__/
+ExecStart=__INSTALL_DIR__/listmonk
 Restart=always
 
 [Install]

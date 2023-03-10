@@ -1,7 +1,0 @@
-SOURCE_URL=https://github.com/knadh/listmonk/releases/download/v2.2.0/listmonk_2.2.0_linux_amd64.tar.gz
-SOURCE_SUM=c2bdccd073d768d2b8dfbfad6469c5b41cf39b44a20c263cbaebf15876463709
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=tar.gz
-SOURCE_IN_SUBDIR=false
-SOURCE_FILENAME=
-SOURCE_EXTRACT=true
