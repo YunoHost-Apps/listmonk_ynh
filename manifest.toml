@@ -42,9 +42,12 @@ ram.runtime = "50M"
     type = "password"
 
 [resources]
+
     [resources.sources]
-    main.url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.2.0.tar.gz"
-    main.sha256 = "6eef831f7ceef80624ae69cd7020504344410d0f8015a0e150b88d324894ca8d"
+
+        [resources.sources.main]
+        url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.2.0.tar.gz"
+        sha256 = "6eef831f7ceef80624ae69cd7020504344410d0f8015a0e150b88d324894ca8d"
 
     [resources.system_user]
 
