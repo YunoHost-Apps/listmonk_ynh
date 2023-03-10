@@ -34,30 +34,7 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
-	then
-		ynh_setup_source --dest_dir="$install_dir/build" --keep="$install_dir/config.toml"
-		# Install Nodejs
-		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
-		# Install Yarn
-
-		# Install Go
-		ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
-		pushd "$install_dir/build"
-			# Build the sources
-			ynh_use_go
-			export GOPATH="$install_dir/build/go"
-			export GOCACHE="$install_dir/build/.cache"
-			ynh_use_nodejs
-			make dist
-			mv listmonk ..
-		popd
-		ynh_remove_go
-		ynh_remove_nodejs
-		ynh_secure_remove --file="$install_dir/build"
-	else
-		ynh_setup_source --dest_dir="$install_dir"  --source_id=$YNH_ARCH --keep="$install_dir/config.toml"
-	fi
+	ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
 fi
 
 chmod -R o-rwx "$install_dir"
