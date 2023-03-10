@@ -18,7 +18,7 @@ code = "https://github.com/knadh/listmonk"
 
 [integration]
 yunohost = ">= 11.1.14"
-architectures = ["amd64", "arm64", "armhf"]
+architectures = ["amd64"]
 multi_instance = true
 ldap = false
 sso = false
