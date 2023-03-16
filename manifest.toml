@@ -5,7 +5,7 @@ name = "Listmonk"
 description.en = "Newsletter and mailing list manager"
 description.fr = "Manager de newsletter et mailing list"
 
-version = "2.3.0~ynh3"
+version = "2.3.0~ynh4"
 
 maintainers = ["Navan Chauhan"]
 
@@ -17,7 +17,7 @@ admindoc = "https://listmonk.app/docs/"
 code = "https://github.com/knadh/listmonk"
 
 [integration]
-yunohost = ">= 11.1.14"
+yunohost = ">= 11.1.15"
 architectures = ["amd64"]
 multi_instance = true
 ldap = false
@@ -71,15 +71,15 @@ ram.runtime = "50M"
 
     api.url = "/api"
     api.show_tile = false
+    api.auth_header = false
     api.allowed = "visitors"
 
     [resources.apt]
     packages = "postgresql"
 
-        [resources.apt.extras.yarn]
-        repo = "deb https://dl.yarnpkg.com/debian/ stable main"
-        key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
-        packages = "yarn"
+    extras.yarn.repo = "deb https://dl.yarnpkg.com/debian/ stable main"
+    extras.yarn.key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    extras.yarn.packages = "yarn"
 
     [resources.database]
     type = "postgresql"
