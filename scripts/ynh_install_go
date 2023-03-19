@@ -1,5 +1,3 @@
-#!/bin/bash
-
 ynh_go_try_bash_extension() {
   if [ -x src/configure ]; then
     src/configure && make -C src || {
