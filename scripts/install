@@ -11,135 +11,59 @@ source ynh_install_go
 source /usr/share/yunohost/helpers
 
 #=================================================
-# MANAGE SCRIPT FAILURE
-#=================================================
-
-ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
-	true
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
-
-#=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
-is_public=$YNH_APP_ARG_IS_PUBLIC
-admin=$YNH_APP_ARG_ADMIN
 password=$YNH_APP_ARG_PASSWORD
-
-app=$YNH_APP_INSTANCE_NAME
-
-#=================================================
-# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
-#=================================================
-ynh_script_progression --message="Validating installation parameters..." --weight=1
-
-# Check machine architecture (in particular, we don't support 32bit machines)
-if [ $YNH_ARCH == "i386" ] || [ $YNH_ARCH == "armel" ]
-then
-	ynh_die --message="Sorry, because of NodeJS framework, this app can't be installed on i386 (32 bits) or armel machine."
-fi
-
-final_path=/var/www/$app
-test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
-
-# Register (book) web path
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..." --weight=1
 
-ynh_app_setting_set --app=$app --key=domain --value=$domain
-ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=admin --value=$admin
 ynh_app_setting_set --app=$app --key=password --value="$password"
-
-#=================================================
-# STANDARD MODIFICATIONS
-#=================================================
-# FIND AND OPEN A PORT
-#=================================================
-ynh_script_progression --message="Finding an available port..." --weight=1
-
-# Find an available port
-port=$(ynh_find_port --port=8095)
-ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=12
 
-ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
-
 if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
 then
 	# Install Nodejs
 	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
-
-	# Install Yarn
-	ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ stable main" --package="yarn" --key="https://dl.yarnpkg.com/debian/pubkey.gpg"
 
 	# Install Go
 	ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
 fi
 
 #=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
-
-# Create a system user
-ynh_system_user_create --username=$app --home_dir="$final_path"
-
-#=================================================
-# CREATE A MYSQL DATABASE
-#=================================================
-ynh_script_progression --message="Creating a PostgreSQL database..." --weight=2
-
-db_name=$(ynh_sanitize_dbid --db_name=$app)
-db_user=$db_name
-ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-ynh_psql_test_if_first_run
-ynh_psql_setup_db --db_user=$db_user --db_name=$db_name
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=3
 
-ynh_app_setting_set --app=$app --key=final_path --value=$final_path
-
 # Download, check integrity, uncompress and patch the source from app.src
 if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
 then
-	ynh_setup_source --dest_dir="$final_path/build"
-	pushd "$final_path/build"
+	ynh_setup_source --dest_dir="$install_dir/build" --source_id=arm
+	pushd "$install_dir/build"
 		# Build the sources
 		ynh_use_go
-		export GOPATH="$final_path/build/go"
-		export GOCACHE="$final_path/build/.cache"
+		export GOPATH="$install_dir/build/go"
+		export GOCACHE="$install_dir/build/.cache"
 		ynh_use_nodejs
 		make dist
 		mv listmonk ..
 	popd
 	ynh_remove_go
 	ynh_remove_nodejs
-	ynh_secure_remove --file="$final_path/build"
+	ynh_secure_remove --file="$install_dir/build"
 else
-	ynh_setup_source --dest_dir="$final_path" --source_id=$YNH_ARCH
+	ynh_setup_source --dest_dir="$install_dir"
 fi
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
-chmod +x "$final_path/listmonk"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
+chmod +x "$install_dir/listmonk"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -154,17 +78,17 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=1
 
-ynh_add_config --template="../conf/config.toml" --destination="$final_path/config.toml"
+ynh_add_config --template="../conf/config.toml" --destination="$install_dir/config.toml"
 
-chmod 400 "$final_path/config.toml"
-chown $app:$app "$final_path/config.toml"
+chmod 400 "$install_dir/config.toml"
+chown $app:$app "$install_dir/config.toml"
 
 #=================================================
 # DATABASE CONFIGURATION
 #=================================================
 ynh_script_progression --message="Generating database..." --weight=1
 
-pushd "$final_path"
+pushd "$install_dir"
 	yes | ./listmonk --install
 popd
 
@@ -190,32 +114,6 @@ ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
 ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
-
-#=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Configuring permissions..." --weight=1
-
-# Make app public if necessary
-if [ $is_public -eq 1 ]
-then
-	ynh_permission_update --permission="main" --add="visitors"
-fi
-
-# Only the admin can access the admin panel of the app (if the app has an admin panel)
-ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin --auth_header=false
-
-# Everyone can access the API part
-# We don't want to display the tile in the SSO so we put --show_tile="false"
-# And we don't want the YunoHost admin to be able to remove visitors group to this permission, so we put --protected="true"
-ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
-
-#=================================================
-# RELOAD NGINX
-#=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
-
-ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
