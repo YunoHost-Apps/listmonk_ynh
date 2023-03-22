@@ -52,7 +52,7 @@ ram.runtime = "50M"
 
         [resources.sources.arm]
         url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.4.0.tar.gz"
-        sha256 = "0a1fb22b485369fd47e8f19830e41c4fe5f6cf839f701fac0f6500071968faf8"
+        sha256 = "60571f7e279524bee81be066bbc27929042dbe7bf4740cabeb734a0269b81939"
 
     [resources.system_user]
 
