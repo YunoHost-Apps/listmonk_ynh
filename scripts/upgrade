@@ -42,6 +42,7 @@ then
 		# Install Go
 		ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
 		pushd "$install_dir/build"
+			cd listmonk-*
 			# Build the sources
 			ynh_use_go
 			export GOPATH="$install_dir/build/go"
