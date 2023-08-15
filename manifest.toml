@@ -45,10 +45,10 @@ ram.runtime = "50M"
         [resources.sources.main]
         amd64.url = "https://github.com/knadh/listmonk/releases/download/v2.5.1/listmonk_2.5.1_linux_amd64.tar.gz"
         amd64.sha256 = "552bb7cb47d7b55be7b48a4ccc19d69b96491065433dafd8cc6a0f39869e4113"
-        armhf.url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.5.1.tar.gz"
-        armhf.sha256 = "c4ce4e283dd924f1a3df62b1a019dd95a366d13b75a7776e206b3320e1edcd41"
-        arm64.url = "https://github.com/knadh/listmonk/archive/refs/tags/v2.5.1.tar.gz"
-        arm64.sha256 = "c4ce4e283dd924f1a3df62b1a019dd95a366d13b75a7776e206b3320e1edcd41"
+        armhf.url = "https://github.com/knadh/listmonk/releases/download/v2.5.1/listmonk_2.5.1_linux_armv7.tar.gz"
+        armhf.sha256 = "7e7e96d64cd2af96711d8d3db717cfdb5c4b8c9ac3fb78b43a4704a8e5625c99"
+        arm64.url = "https://github.com/knadh/listmonk/releases/download/v2.5.1/listmonk_2.5.1_linux_arm64.tar.gz"
+        arm64.sha256 = "832c5a34ed78446c179ed5423cdbce51d3e51333c1ea6cf11c74b63e0776193a"
         in_subdir = false
 
     [resources.system_user]
