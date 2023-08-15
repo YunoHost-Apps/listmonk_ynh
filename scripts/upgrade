@@ -34,42 +34,13 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "arm64" ]
-	then
-		ynh_setup_source --dest_dir="$install_dir/build" --keep="$install_dir/config.toml"
-		# Install Nodejs
-		ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
-		# Install Go
-		ynh_exec_warn_less ynh_install_go --go_version=$GO_VERSION
-		pushd "$install_dir/build"
-			cd listmonk-*
-			# Build the sources
-			ynh_use_go
-			export GOPATH="$install_dir/build/go"
-			export GOCACHE="$install_dir/build/.cache"
-			ynh_use_nodejs
-			make dist
-			mv listmonk ../../
-		popd
-		ynh_remove_go
-		ynh_remove_nodejs
-		ynh_secure_remove --file="$install_dir/build"
-	else
-		ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
-	fi
+	ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
+	
 fi
 
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 chmod +x "$install_dir/listmonk"
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=1
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
 
 #=================================================
 # DATABASE CONFIGURATION
@@ -85,13 +56,11 @@ popd
 #=================================================
 ynh_script_progression --message="Upgrading systemd configuration..." --weight=2
 
+# Create a dedicated NGINX config
+ynh_add_nginx_config
+
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
 yunohost service add $app --description="Newsletter and mailing list manager" --log="/var/log/$app/$app.log"
 
