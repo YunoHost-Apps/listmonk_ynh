@@ -19,7 +19,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 Listmonk est un gestionnaire de newsletter et de liste de diffusion autonome et auto-hébergé. Il est rapide, riche en fonctionnalités et emballé dans un seul binaire. Il utilise une base de données PostgreSQL comme base de données.
 
 
-**Version incluse :** 2.5.1~ynh1
+**Version incluse :** 2.5.1~ynh2
 
 **Démo :** https://demo.listmonk.app/
 

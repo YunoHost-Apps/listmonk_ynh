@@ -25,7 +25,7 @@ chmod +x "$install_dir/listmonk"
 #=================================================
 ynh_script_progression --message="Restoring the PostgreSQL database..." --weight=6
 
-ynh_psql_execute_file_as_root --file="./db.sql" --database=$db_name
+ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < ./db.sql
 
 #=================================================
 # RESTORE SYSTEMD
@@ -42,7 +42,7 @@ yunohost service add $app --description="Newsletter and mailing list manager" --
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=3
+ynh_script_progression --message="Reloading NGINX web server and $app's service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
 
