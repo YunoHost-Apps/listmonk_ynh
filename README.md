@@ -19,7 +19,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Listmonk is a standalone, self-hosted, newsletter and mailing list manager. It is fast, feature-rich, and packed into a single binary. It uses a PostgreSQL database as its data base.
 
 
-**Shipped version:** 2.5.1~ynh1
+**Shipped version:** 2.5.1~ynh2
 
 **Demo:** https://demo.listmonk.app/
 
