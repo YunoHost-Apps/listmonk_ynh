@@ -32,7 +32,7 @@ Listmonk is a standalone, self-hosted, newsletter and mailing list manager. It i
 * Official app website: <https://listmonk.app/>
 * Official admin documentation: <https://listmonk.app/docs/>
 * Upstream app code repository: <https://github.com/knadh/listmonk>
-* YunoHost documentation for this app: <https://yunohost.org/app_listmonk>
+* YunoHost Store: <https://apps.yunohost.org/app/listmonk>
 * Report a bug: <https://github.com/YunoHost-Apps/listmonk_ynh/issues>
 
 ## Developer info
