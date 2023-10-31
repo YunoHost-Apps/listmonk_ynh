@@ -32,7 +32,6 @@ Listmonk est un gestionnaire de newsletter et de liste de diffusion autonome et 
 * Site officiel de l’app : <https://listmonk.app/>
 * Documentation officielle de l’admin : <https://listmonk.app/docs/>
 * Dépôt de code officiel de l’app : <https://github.com/knadh/listmonk>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_listmonk>
 * Signaler un bug : <https://github.com/YunoHost-Apps/listmonk_ynh/issues>
 
 ## Informations pour les développeurs
