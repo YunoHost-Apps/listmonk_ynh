@@ -5,7 +5,7 @@ name = "Listmonk"
 description.en = "Newsletter and mailing list manager"
 description.fr = "Manager de newsletter et mailing list"
 
-version = "2.5.1~ynh2"
+version = "2.5.1~ynh3"
 
 maintainers = ["Navan Chauhan"]
 
@@ -34,9 +34,6 @@ ram.runtime = "50M"
     type = "group"
     default = "visitors"
 
-    [install.admin]
-    type = "user"
-
 [resources]
 
     [resources.sources]
@@ -50,7 +47,13 @@ ram.runtime = "50M"
         arm64.sha256 = "832c5a34ed78446c179ed5423cdbce51d3e51333c1ea6cf11c74b63e0776193a"
         in_subdir = false
 
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.asset.amd64 = ".*_linux_amd64.tar.gz"
+        autoupdate.asset.armhf = ".*_linux_armv7.tar.gz"
+        autoupdate.asset.arm64 = ".*_linux_arm64.tar.gz"
+
     [resources.system_user]
+    allow_email = true
 
     [resources.ports]
 
@@ -65,10 +68,11 @@ ram.runtime = "50M"
     admin.auth_header = false
     admin.allowed = "admins"
 
+    # internal API, should not be allowed to visitors
     api.url = "/api"
     api.show_tile = false
     api.auth_header = false
-    api.allowed = "visitors"
+    api.allowed = "admins"
 
     [resources.apt]
     packages = "postgresql"
