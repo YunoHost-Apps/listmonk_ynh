@@ -15,9 +15,16 @@ ynh_systemctl --service=$app --action="stop" --log_path="systemd"
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml uploads" --full_replace
+ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="$install_dir/config.toml uploads"
 
 chmod +x "$install_dir/listmonk"
+
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration..."
+
+ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
 
 #=================================================
 # DATABASE CONFIGURATION
