@@ -4,7 +4,7 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-# FIXME https://listmonk.app/docs/swagger/#/Settings/getSettings
+# FIX https://listmonk.app/docs/swagger/#/Settings/getSettings
 _listmonk_configure_with_api () {
     python -c """
 from urllib.request import urlopen, Request
