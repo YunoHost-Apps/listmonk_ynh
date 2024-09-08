@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # Listmonk for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/listmonk.svg)](https://dash.yunohost.org/appci/app/listmonk) ![Working status](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
+[![Integration level](https://dash.yunohost.org/integration/listmonk.svg)](https://ci-apps.yunohost.org/ci/apps/listmonk/) ![Working status](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
 
 [![Install Listmonk with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=listmonk)
 

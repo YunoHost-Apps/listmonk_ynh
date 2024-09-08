@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Listmonk YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/listmonk.svg)](https://dash.yunohost.org/appci/app/listmonk) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/listmonk.svg)](https://ci-apps.yunohost.org/ci/apps/listmonk/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
 
 [![Instalatu Listmonk YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=listmonk)
 
