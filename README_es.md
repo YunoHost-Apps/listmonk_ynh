@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # Listmonk para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/listmonk.svg)](https://dash.yunohost.org/appci/app/listmonk) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/listmonk.svg)](https://ci-apps.yunohost.org/ci/apps/listmonk/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
 
 [![Instalar Listmonk con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=listmonk)
 
@@ -19,7 +19,7 @@ No se debe editar a mano.
 Listmonk is a standalone, self-hosted, newsletter and mailing list manager. It is fast, feature-rich, and packed into a single binary. It uses a PostgreSQL database as its data base.
 
 
-**Versión actual:** 3.0.0~ynh1
+**Versión actual:** 3.0.0~ynh2
 
 **Demo:** <https://demo.listmonk.app/>
 

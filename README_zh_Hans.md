@@ -5,7 +5,7 @@
 
 # YunoHost 上的 Listmonk
 
-[![集成程度](https://dash.yunohost.org/integration/listmonk.svg)](https://dash.yunohost.org/appci/app/listmonk) ![工作状态](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/listmonk.svg)](https://ci-apps.yunohost.org/ci/apps/listmonk/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/listmonk.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/listmonk.maintain.svg)
 
 [![使用 YunoHost 安装 Listmonk](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=listmonk)
 
@@ -19,7 +19,7 @@
 Listmonk is a standalone, self-hosted, newsletter and mailing list manager. It is fast, feature-rich, and packed into a single binary. It uses a PostgreSQL database as its data base.
 
 
-**分发版本：** 3.0.0~ynh1
+**分发版本：** 3.0.0~ynh2
 
 **演示：** <https://demo.listmonk.app/>
 

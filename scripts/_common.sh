@@ -1,14 +1,10 @@
 #!/bin/bash
 
 #=================================================
-# COMMON VARIABLES
+# COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-#=================================================
-# PERSONAL HELPERS
-#=================================================
-
-# FIXME https://listmonk.app/docs/swagger/#/Settings/getSettings
+# FIX https://listmonk.app/docs/swagger/#/Settings/getSettings
 _listmonk_configure_with_api () {
     python -c """
 from urllib.request import urlopen, Request
@@ -30,11 +26,3 @@ with urlopen(request) as response:
     print(response.read())
 """
 }
-
-#=================================================
-# EXPERIMENTAL HELPERS
-#=================================================
-
-#=================================================
-# FUTURE OFFICIAL HELPERS
-#=================================================
