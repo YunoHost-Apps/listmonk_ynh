@@ -12,5 +12,6 @@ Visit Settings -> SMTP and replace with these values:
 - Auth protocol: PLAIN
 - User: __APP__
 - Password: __MAIL_PWD__
+- HELO hostname: __DOMAIN__
 
 Then, test the connection
