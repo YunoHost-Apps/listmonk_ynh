@@ -19,7 +19,7 @@ Il NE doit PAS être modifié à la main.
 Listmonk est un gestionnaire de newsletter et de liste de diffusion autonome et auto-hébergé. Il est rapide, riche en fonctionnalités et emballé dans un seul binaire. Il utilise une base de données PostgreSQL comme base de données.
 
 
-**Version incluse :** 3.0.0~ynh2
+**Version incluse :** 4.0.0~ynh1
 
 **Démo :** <https://demo.listmonk.app/>
 
