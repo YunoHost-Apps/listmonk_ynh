@@ -19,7 +19,7 @@
 Listmonk is a standalone, self-hosted, newsletter and mailing list manager. It is fast, feature-rich, and packed into a single binary. It uses a PostgreSQL database as its data base.
 
 
-**分发版本：** 3.0.0~ynh2
+**分发版本：** 4.0.1~ynh1
 
 **演示：** <https://demo.listmonk.app/>
 
