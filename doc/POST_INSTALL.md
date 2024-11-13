@@ -7,10 +7,11 @@ Visit Settings -> General and replace these values:
 
 Visit Settings -> SMTP and replace with these values:
 
-- Host: 127.0.0.1
+- Host: localhost
 - Port: 25
 - Auth protocol: PLAIN
 - User: __APP__
 - Password: __MAIL_PWD__
+- HELO hostname: __DOMAIN__
 
 Then, test the connection
