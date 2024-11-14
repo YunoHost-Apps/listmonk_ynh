@@ -35,6 +35,12 @@ ram.runtime = "50M"
     type = "group"
     default = "visitors"
 
+    [install.admin]
+    type = "user"
+
+    [install.password]
+    type = "password"
+    
 [resources]
 
     [resources.sources]
