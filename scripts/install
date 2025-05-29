@@ -4,6 +4,12 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# INITIALIZE AND STORE SETTINGS
+#=================================================
+
+ynh_app_setting_set --key=password --value=$password
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Setting up source files..."
@@ -12,7 +18,7 @@ ynh_setup_source --dest_dir="$install_dir"
 
 mkdir "$install_dir/uploads"
 
-chown -R "$app:www-data" "$install_dir"
+chown -R "$app:" "$install_dir"
 chmod +x "$install_dir/listmonk"
 
 #=================================================
