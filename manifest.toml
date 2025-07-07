@@ -5,7 +5,7 @@ name = "Listmonk"
 description.en = "Newsletter and mailing list manager"
 description.fr = "Manager de newsletter et mailing list"
 
-version = "5.0.1~ynh1"
+version = "5.0.3~ynh1"
 
 maintainers = ["Navan Chauhan"]
 
@@ -42,12 +42,12 @@ ram.runtime = "50M"
     [resources.sources]
 
         [resources.sources.main]
-        amd64.url = "https://github.com/knadh/listmonk/releases/download/v5.0.1/listmonk_5.0.1_linux_amd64.tar.gz"
-        amd64.sha256 = "956dcb53b05ed2ece86e491fa121b38fdf373dc5bdf1bffd1a82aff711b5ef4c"
-        armhf.url = "https://github.com/knadh/listmonk/releases/download/v5.0.1/listmonk_5.0.1_linux_armv7.tar.gz"
-        armhf.sha256 = "398a1d737c09e0a9107493d67ed95c2fe344869748356ec1b71682d7388a48b4"
-        arm64.url = "https://github.com/knadh/listmonk/releases/download/v5.0.1/listmonk_5.0.1_linux_arm64.tar.gz"
-        arm64.sha256 = "e42a95beb120f879fc7265b0184fdb1f6bd7270939e59337b9220a6001cfe70d"
+        amd64.url = "https://github.com/knadh/listmonk/releases/download/v5.0.3/listmonk_5.0.3_linux_amd64.tar.gz"
+        amd64.sha256 = "75bc28e39c261abb9a6e7e3f8fb0410a59f0161db9402691da8286254e99772b"
+        armhf.url = "https://github.com/knadh/listmonk/releases/download/v5.0.3/listmonk_5.0.3_linux_armv7.tar.gz"
+        armhf.sha256 = "597fad72d208b725fa7b09aa515be304f365112d8fccad8ef3f30223786f78b4"
+        arm64.url = "https://github.com/knadh/listmonk/releases/download/v5.0.3/listmonk_5.0.3_linux_arm64.tar.gz"
+        arm64.sha256 = "ffab19bae33fd474657d464b008a9ce70136c4b6e974cfab61f2560f351a4477"
         in_subdir = false
 
         autoupdate.strategy = "latest_github_release"
