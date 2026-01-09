@@ -12,7 +12,7 @@ ynh_setup_source --dest_dir="$install_dir"
 
 mkdir "$install_dir/uploads"
 
-chown -R "$app:www-data" "$install_dir"
+chown -R "$app:$app" "$install_dir"
 chmod +x "$install_dir/listmonk"
 
 #=================================================
@@ -47,7 +47,7 @@ yunohost service add $app --description="Newsletter and mailing list manager" --
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start"
 
 #=================================================
 # END OF SCRIPT
