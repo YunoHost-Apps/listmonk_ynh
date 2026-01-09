@@ -10,9 +10,6 @@ ynh_script_progression "Setting up source files..."
 
 ynh_setup_source --dest_dir="$install_dir"
 
-mkdir "$install_dir/uploads"
-
-chown -R "$app:$app" "$install_dir"
 chmod +x "$install_dir/listmonk"
 
 #=================================================
