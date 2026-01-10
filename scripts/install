@@ -10,9 +10,6 @@ ynh_script_progression "Setting up source files..."
 
 ynh_setup_source --dest_dir="$install_dir"
 
-mkdir "$install_dir/uploads"
-
-chown -R "$app:www-data" "$install_dir"
 chmod +x "$install_dir/listmonk"
 
 #=================================================
@@ -21,6 +18,7 @@ chmod +x "$install_dir/listmonk"
 ynh_script_progression "Adding $app's configuration..."
 
 ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
+ynh_config_add --template=".env" --destination="$install_dir/.env"
 
 #=================================================
 # DATABASE CONFIGURATION
@@ -47,7 +45,7 @@ yunohost service add $app --description="Newsletter and mailing list manager" --
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start"
 
 #=================================================
 # END OF SCRIPT
