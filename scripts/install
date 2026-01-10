@@ -18,6 +18,7 @@ chmod +x "$install_dir/listmonk"
 ynh_script_progression "Adding $app's configuration..."
 
 ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
+ynh_config_add --template=".env" --destination="$install_dir/.env"
 
 #=================================================
 # DATABASE CONFIGURATION

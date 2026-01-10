@@ -6,6 +6,7 @@ Documentation=https://listmonk.app/docs/
 Type=simple
 User=__APP__
 Group=__APP__
+EnvironmentFile=__INSTALL_DIR__/.env
 WorkingDirectory=__INSTALL_DIR__/
 ExecStartPre=/usr/bin/mkdir -p "__INSTALL_DIR__/uploads"
 ExecStartPre=__INSTALL_DIR__/listmonk --config __INSTALL_DIR__/config.toml --upgrade --yes

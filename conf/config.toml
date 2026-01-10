@@ -5,9 +5,6 @@
 # port, use port 80 (this will require running with elevated permissions).
 address = "127.0.0.1:__PORT__"
 
-admin_username = "__ADMIN__"
-admin_password = "__PASSWORD__"
-
 # Database.
 [db]
 host = "localhost"
