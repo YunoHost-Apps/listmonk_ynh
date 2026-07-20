@@ -12,6 +12,7 @@ port = 5432
 user = "__DB_USER__"
 password = "__DB_PWD__"
 database = "__DB_NAME__"
+
 ssl_mode = "disable"
 max_open = 25
 max_idle = 25
